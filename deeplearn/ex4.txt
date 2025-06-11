@@ -1,0 +1,160 @@
+Graded lab 4
+
+# GRADED CELL: Exercise 1
+
+### START CODE HERE ###
+
+# write the query to get the number of unique movie ids in the movies table
+query_unique_movies = """
+SELECT COUNT(DISTINCT movie_id) AS num_unique_movies
+FROM movies;
+"""
+
+# write the query to get the number of rows in the movies table
+query_num_rows = """
+SELECT COUNT(movie_id) AS num_rows
+FROM movies;
+"""
+
+# run the queries and save the results
+df_unique_movies = pd.read_sql_query(query_unique_movies, connection)
+df_num_rows = pd.read_sql_query(query_num_rows, connection)
+
+### END CODE HERE ###
+
+# GRADED CELL: Exercise 2
+
+### START CODE HERE ###
+
+# write the query to get movies with missing release years
+query_missing_year = """
+SELECT movie_id, movie_title, director_name, movie_popularity
+FROM movies
+WHERE movie_release_year IS NULL;
+"""
+
+# run the query and save the results
+df_missing_years = pd.read_sql_query(query_missing_year, connection)
+
+### END CODE HERE ###
+
+# GRADED CELL: Exercise 3
+
+### START CODE HERE ###
+
+# write the query to count the number of movies in each popularity category
+query_rating_binning = """
+SELECT
+  CASE
+    WHEN rating > 3.5 THEN 'High'
+    WHEN rating BETWEEN 2.5 AND 3.5 THEN 'Medium'
+    ELSE 'Low'
+  END AS rating_category,
+  COUNT(*)
+FROM movies
+GROUP BY rating_category;
+"""
+
+# run the query
+df_rating_binning = pd.read_sql_query(query_rating_binning, connection)
+
+### END CODE HERE ###
+
+
+ # GRADED CELL: Exercise 4
+
+### START CODE HERE ###
+
+# write the query to get the movies released after 2015
+# with a rating between 4.5 and 4.9
+query_high_rated_recent = """
+SELECT movie_title, rating, movie_release_year
+FROM movies
+WHERE movie_release_year > 2015 AND rating BETWEEN 4.5 AND 4.9
+ORDER BY rating DESC, movie_release_year DESC
+"""
+ 
+# run the query and save the results
+df_high_rated_recent = pd.read_sql_query(query_high_rated_recent, connection)
+
+### END CODE HERE ###
+
+
+# GRADED CELL: Exercise 5
+
+### START CODE HERE ###
+
+# write the query to get the "director's cut" movies
+query_director_cut = """
+SELECT movie_title, director_name, rating
+FROM movies
+WHERE movie_title LIKE "%director's cut%" AND rating IS NOT NULL
+ORDER BY rating DESC;
+"""
+
+# run the query and save the results
+df_director_cut = pd.read_sql_query(query_director_cut, connection)
+
+### END CODE HERE ###
+
+
+# GRADED CELL: Exercise 6
+
+### START CODE HERE ###
+
+# write a query to get the average rating and maximum popularity
+query_avg_rating_year = """
+SELECT
+  movie_release_year AS year,
+  AVG(rating) AS avg_rating,
+  MAX(movie_popularity) AS max_popularity
+FROM movies
+GROUP BY year
+ORDER BY year DESC
+LIMIT 10;
+"""
+
+# run the query and save the results
+df_avg_rating_year = pd.read_sql_query(query_avg_rating_year, connection)
+
+### END CODE HERE ###
+
+
+# GRADED CELL: Exercise 7
+
+### START CODE HERE ###
+
+# write a query to get the movie name and critiques of the most liked critiques
+query_top_critiques = """
+SELECT movie_title, movie_release_year, ratings.critique, ratings.critique_likes
+FROM movies
+INNER JOIN ratings
+  ON movies.movie_id = ratings.movie_id
+ORDER BY ratings.critique_likes DESC
+LIMIT 10;
+"""
+
+# run the query and save the results
+df_top_critiques = pd.read_sql_query(query_top_critiques, connection)
+
+### END CODE HERE ###
+
+
+# GRADED CELL: Exercise 8
+
+### START CODE HERE ###
+
+# write a query to get the movie names of the movies with no ratings in the `ratings` table
+query_no_ratings = """
+SELECT COUNT(*) AS num_no_reviews
+FROM movies
+LEFT JOIN ratings
+ON movies.movie_id = ratings.movie_id
+WHERE ratings.movie_id IS NULL;
+"""
+
+# run the query and save the results
+df_no_ratings = pd.read_sql_query(query_no_ratings, connection)
+
+
+### END CODE HERE ###
