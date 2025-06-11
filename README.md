@@ -1,32 +1,32 @@
-### Data I/O & Preprocessing with Python and SQL
+## Data I/O & Preprocessing with Python and SQL
 
 <b> Course was led by Sean Barnes </b>
 
-<b> Ipynb. files can be found below, these files contain the graded labs
-for this certification. </b>
+<p> Ipynb. files can be found below, these files contain the graded labs
+for this certification. </p>
 
 <p></n></p>
 
-#### Web Scraping & Text Preprocessing
+### Web Scraping & Text Preprocessing
 
-[Exam 1](t1/README.md "Exam 1")
-
-
-#### API's and Numerical Cleaning
-
-[Exam 2](t2/README.md "Exam 2")
+[Exam 1](deeplearn/C4M1_Assignment.ipynb)
 
 
-#### Databases
+### API's and Numerical Cleaning
 
-[Exam 3](t3/README.md "Exam 3")
-
-
-#### Preprocessing and Validation with SQL
-
-[Exam 4](t4/README.md "Exam 4")
+[Exam 2](deeplearn/C4M2_Assignment.ipynb)
 
 
-#### Capstone Exam
+### Databases
 
-[Exam 5](t5/README.md "Exam 5")
+[Exam 3](deeplearn/C4M3_Assignment.ipynb)
+
+
+### Preprocessing and Validation with SQL
+
+[Exam 4](deeplearn/C4M4_Assignment.ipynb)
+
+
+### Capstone Exam
+
+[Exam 5](deeplearn/C4_Capstone_Assignment.ipynb)
